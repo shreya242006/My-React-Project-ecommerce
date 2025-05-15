@@ -4,17 +4,16 @@ import { useCart } from "../context/cartContext";
 export default function ProductCard({ product }) {
     const { addToCart } = useCart();
     const navigate = useNavigate();
-    const goToDetails = () => navigate(`/product/${product.id}`);
+    const goToDetails = () => navigate(`/product/${product.id}`); // ✅ Fixed syntax
 
     // Styles
     const cardStyle = {
         width: "250px",
-        backgroundColor: "#fff",
-        color: "#333",
+        backgroundColor: "#FFF9E3", // Light cream
+        color: "#000000", // Black
         borderRadius: "8px",
         boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
         overflow: "hidden",
-        margin: "15px",
         fontFamily: "'Roboto', sans-serif",
         display: "flex",
         flexDirection: "column",
@@ -43,24 +42,24 @@ export default function ProductCard({ product }) {
         fontSize: "16px",
         fontWeight: "bold",
         margin: "10px 0",
-        color: "#333"
+        color: "#000000"
     };
 
     const priceStyle = {
-        color: "#FF5722", // e-commerce standard price color
+        color: "#00008B", // Dark blue for contrast
         fontSize: "18px",
         marginBottom: "8px",
     };
 
     const detailsText = {
-        color: "#888",
+        color: "#333",
         fontSize: "14px",
         marginTop: "8px",
         fontWeight: "normal"
     };
 
     const buttonStyle = {
-        backgroundColor: "#FF5722", // standard orange for action
+        backgroundColor: "#00008B", // Dark Blue
         color: "#fff",
         border: "none",
         padding: "12px 0",
@@ -74,7 +73,7 @@ export default function ProductCard({ product }) {
     };
 
     const handleHover = (e, hover) => {
-        e.target.style.backgroundColor = hover ? "#e55e2a" : "#FF5722";
+        e.target.style.backgroundColor = hover ? "#000070" : "#00008B"; // Darker on hover
     };
 
     return (

@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { products } from "../date/product.js";
 import ProductCard from "../components/ProductCard";
-import { FaStoreAlt } from "react-icons/fa"; // 🎯 Fancy store icon
-// Remove: import "./Home.css"; — if you're switching to inline or scoped styles
+import { FaStoreAlt } from "react-icons/fa";
 
 export default function Home() {
     const [search, setSearch] = useState("");
@@ -18,55 +17,74 @@ export default function Home() {
 
     const styles = {
         container: {
-            padding: "30px",
+            padding: "40px 20px",
             fontFamily: "'Segoe UI', sans-serif",
-            backgroundColor: "#f9f9ff",
+            backgroundColor: "#f5f7fa",
             minHeight: "100vh",
-            color: "#222"
+            color: "#1c1c1c"
         },
         heading: {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            fontSize: "2rem",
-            color: "rebeccapurple",
-            gap: "10px",
-            marginBottom: "25px"
+            fontSize: "2.4rem",
+            fontWeight: "700",
+            color: "royalblue",
+            gap: "12px",
+            marginBottom: "35px",
+            cursor: "pointer",
+            transition: "all 0.3s ease",
+            textShadow: "1px 1px 2px rgba(0,0,0,0.1)"
         },
         filters: {
             display: "flex",
             justifyContent: "center",
-            gap: "15px",
-            marginBottom: "35px",
+            gap: "20px",
+            marginBottom: "40px",
             flexWrap: "wrap"
         },
         input: {
-            padding: "10px",
+            padding: "12px",
             fontSize: "1rem",
-            borderRadius: "6px",
-            border: "1px solid #ccc",
-            minWidth: "220px"
+            borderRadius: "8px",
+            border: "2px solid #ccc",
+            minWidth: "240px",
+            outline: "none",
+            transition: "border 0.2s ease, box-shadow 0.2s",
         },
         select: {
-            padding: "10px",
+            padding: "12px",
             fontSize: "1rem",
-            borderRadius: "6px",
-            border: "1px solid #ccc",
-            minWidth: "180px"
+            borderRadius: "8px",
+            border: "2px solid #ccc",
+            minWidth: "180px",
+            outline: "none",
+            transition: "border 0.2s ease, box-shadow 0.2s",
         },
         grid: {
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-            gap: "20px"
+            gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+            gap: "24px"
         }
     };
 
     return (
         <div style={styles.container}>
-            <h1 style={styles.heading}>
-                <FaStoreAlt size={30} color="rebeccapurple" />
-                Explore Our Products
+            <h1
+                style={styles.heading}
+                onMouseEnter={(e) => {
+                    e.currentTarget.style.color = "royalred";
+                    e.currentTarget.style.transform = "scale(1.03)";
+                }}
+                onMouseLeave={(e) => {
+                    e.currentTarget.style.color = "royalblue";
+                    e.currentTarget.style.transform = "scale(1)";
+                }}
+            >
+                <FaStoreAlt size={32} color="rebeccapurple" />
+                Explore My Products
             </h1>
+
             <div style={styles.filters}>
                 <input
                     type="text"
@@ -74,17 +92,34 @@ export default function Home() {
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                     style={styles.input}
+                    onFocus={(e) => {
+                        e.target.style.border = "2px solid royalblue";
+                        e.target.style.boxShadow = "0 0 8px rgba(65, 105, 225, 0.3)";
+                    }}
+                    onBlur={(e) => {
+                        e.target.style.border = "2px solid #ccc";
+                        e.target.style.boxShadow = "none";
+                    }}
                 />
                 <select
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
                     style={styles.select}
+                    onFocus={(e) => {
+                        e.target.style.border = "2px solid royalblue";
+                        e.target.style.boxShadow = "0 0 8px rgba(65, 105, 225, 0.3)";
+                    }}
+                    onBlur={(e) => {
+                        e.target.style.border = "2px solid #ccc";
+                        e.target.style.boxShadow = "none";
+                    }}
                 >
                     {categories.map((cat) => (
                         <option key={cat}>{cat}</option>
                     ))}
                 </select>
             </div>
+
             <div style={styles.grid}>
                 {filtered.map((product) => (
                     <ProductCard key={product.id + product.name} product={product} />

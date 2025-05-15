@@ -10,48 +10,68 @@ export default function ProductsDetails() {
 
     const styles = {
         container: {
-            maxWidth: "800px",
-            margin: "50px auto",
-            padding: "30px",
-            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+            maxWidth: "850px",
+            margin: "60px auto",
+            padding: "40px",
+            backgroundColor: "#111", // Dark background
+            color: "#fff",
             borderRadius: "12px",
-            backgroundColor: "#fff",
+            boxShadow: "0 0 20px rgba(255, 0, 255, 0.2)",
             fontFamily: "'Segoe UI', sans-serif",
-            textAlign: "center"
+            textAlign: "center",
+            transition: "all 0.3s ease-in-out"
         },
         image: {
             maxWidth: "100%",
             height: "auto",
-            borderRadius: "10px",
-            marginBottom: "20px"
+            borderRadius: "12px",
+            marginBottom: "25px",
+            boxShadow: "0 0 15px rgba(255, 255, 255, 0.2)"
         },
         name: {
-            fontSize: "2rem",
-            marginBottom: "10px",
-            color: "#333"
+            fontSize: "2.5rem",
+            marginBottom: "15px",
+            color: "#FF00FF",
+            textShadow: "0 0 5px #FF00FF, 0 0 10px #FF00FF"
         },
         description: {
             fontSize: "1.1rem",
-            marginBottom: "15px",
-            color: "#555"
+            marginBottom: "20px",
+            color: "#ccc",
+            lineHeight: "1.6"
         },
         price: {
-            fontSize: "1.3rem",
+            fontSize: "1.6rem",
             fontWeight: "bold",
-            color: "green",
-            marginBottom: "20px"
+            color: "#00FFAB",
+            marginBottom: "30px",
+            textShadow: "0 0 4px #00FFAB"
         },
         button: {
-            padding: "12px 25px",
-            fontSize: "1rem",
-            backgroundColor: "#4CAF50",
+            padding: "14px 30px",
+            fontSize: "1.1rem",
+            backgroundColor: "#FF00FF",
             color: "#fff",
             border: "none",
-            borderRadius: "6px",
+            borderRadius: "8px",
             cursor: "pointer",
-            transition: "background 0.3s ease"
+            transition: "all 0.3s ease-in-out",
+            boxShadow: "0 0 10px #FF00FF, 0 0 20px #FF00FF"
+        },
+        buttonHover: {
+            backgroundColor: "#e600e6",
+            boxShadow: "0 0 15px #FF00FF, 0 0 30px #FF00FF"
         }
     };
+
+    // Handle hover for the button
+    const handleHover = (e, hovering) => {
+        Object.assign(e.target.style, hovering ? styles.buttonHover : styles.button);
+    };
+
+    if (!product) {
+        return <h2 style={{ color: "#fff", textAlign: "center" }}>Product not found.</h2>;
+    }
 
     return (
         <div style={styles.container}>
@@ -61,6 +81,8 @@ export default function ProductsDetails() {
             <p style={styles.price}>₹{product.price}</p>
             <button
                 style={styles.button}
+                onMouseEnter={(e) => handleHover(e, true)}
+                onMouseLeave={(e) => handleHover(e, false)}
                 onClick={() => {
                     addToCart(product);
                     navigate("/cart");

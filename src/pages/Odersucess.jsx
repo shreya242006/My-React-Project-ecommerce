@@ -1,7 +1,7 @@
 import { useCart } from "../context/cartContext";
 import { useEffect } from "react";
 
-export default function Ordersuccess() {
+export default function OrderSuccess() {
     const { clearCart } = useCart();
 
     useEffect(() => {
@@ -16,38 +16,74 @@ export default function Ordersuccess() {
             alignItems: "center",
             height: "100vh",
             textAlign: "center",
-            backgroundColor: "#f5f5f5",
+            backgroundColor: "#0a0a23", // Deep navy for better contrast
             padding: "20px",
-            fontFamily: "'Segoe UI', sans-serif"
+            fontFamily: "'Segoe UI', sans-serif",
+            color: "#fff",
+            transition: "all 0.3s ease-in-out",
+            overflow: "hidden"
         },
         title: {
-            fontSize: "2.5rem",
-            color: "#4CAF50",
-            marginBottom: "20px"
+            fontSize: "3.5rem",
+            color: "#00d4ff", // Neon blue
+            marginBottom: "20px",
+            textShadow: `
+                0 0 5px #00d4ff,
+                0 0 10px #00d4ff,
+                0 0 20px #00d4ff,
+                0 0 40px #00d4ff
+            `,
+            animation: "pulse 2s infinite"
         },
         message: {
-            fontSize: "1.2rem",
-            color: "#333",
-            marginBottom: "30px"
+            fontSize: "1.5rem",
+            color: "#e0f7ff",
+            marginBottom: "40px",
+            textShadow: "0 0 8px #99f0ff"
         },
         button: {
-            padding: "12px 25px",
-            fontSize: "1rem",
-            backgroundColor: "#4CAF50",
+            padding: "14px 35px",
+            fontSize: "1.3rem",
+            backgroundColor: "#00b8ff",
             color: "#fff",
             border: "none",
-            borderRadius: "6px",
+            borderRadius: "8px",
             cursor: "pointer",
-            transition: "background 0.3s ease",
-            textDecoration: "none"
+            transition: "all 0.3s ease-in-out",
+            textDecoration: "none",
+            boxShadow: "0 0 10px #00b8ff, 0 0 20px #00b8ff",
+            textAlign: "center",
+        },
+        buttonHover: {
+            backgroundColor: "#1ad4ff",
+            boxShadow: "0 0 15px #00b8ff, 0 0 30px #00b8ff"
+        },
+        '@keyframes pulse': {
+            from: {
+                textShadow: "0 0 10px #00d4ff, 0 0 20px #00d4ff"
+            },
+            to: {
+                textShadow: "0 0 20px #00d4ff, 0 0 40px #00d4ff"
+            }
         }
+    };
+
+    const handleButtonHover = (e, hovering) => {
+        Object.assign(e.target.style, hovering ? styles.buttonHover : styles.button);
     };
 
     return (
         <div style={styles.container}>
             <h1 style={styles.title}>🎉 Order Placed Successfully!</h1>
-            <p style={styles.message}>Thank you for shopping with us.</p>
-            <a href="/" style={styles.button}>Go to Home</a>
+            <p style={styles.message}>Thank you for shopping with us. Your order is being processed.</p>
+            <a
+                href="/"
+                style={styles.button}
+                onMouseEnter={(e) => handleButtonHover(e, true)}
+                onMouseLeave={(e) => handleButtonHover(e, false)}
+            >
+                Go to Home
+            </a>
         </div>
     );
 }
